@@ -1,3 +1,27 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #fff; 
+  padding: 10px 20px;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: flex-end;
+}
+.navbar a {
+  background: transparent; 
+  color: black; 
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.navbar a:hover {
+  background-color: #0056b3;
+}
+
 .todo-list {
     background: #FFF;
     font-size: 20px;
@@ -120,9 +144,56 @@
     -webkit-animation-name: explode;
             animation-name: explode;
   }
-  html {
-    background: #ddd;
-  }
+
+.add-task-button {
+  background-color: transparent; 
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: auto; 
+  margin: 10px 0px 5px 0px; 
+  display: flex;
+  align-items: center; 
+}
+
+.plus-sign {
+  font-size: 24px; 
+  color: #007bff; 
+}
+
+.add-task-text {
+  margin-left: 10px; 
+  font-size: 16px; 
+  color: #666; 
+}
+
+.add-task-button:hover .plus-sign,
+.add-task-button:hover .add-task-text {
+  color: #0056b3; 
+}
+
+
+
+
+.completed-section {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.completed-text {
+  color: #666;
+  font-size: 18px;
+  margin: 0 0 0 10px;
+}
+
+.completed-tasks {
+  display: none; /* Initially hide the completed tasks */
+}
+
+
   html {
     height: 100%;
     display: flex;
