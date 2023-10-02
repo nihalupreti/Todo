@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static "home/register.css" %}">
+</head>
+<body>
+   
+<div class='login'>
+  <h2>Register</h2>
+  <form method="POST">
+    {% csrf_token %}
+      <input name='username' placeholder='Username' type='text'>
+      <input id='pw' name='password' placeholder='Password' type='password'>
+      <input name='email' placeholder='E-Mail Address' type='text'>
+      <input class='animated' type='submit' value='Register'>
+  </form>
+  <a class='forgot' href='{% url "login-page" %}'>Already have an account?</a>
+</div>
+
+</body>
+</html>

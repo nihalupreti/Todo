@@ -8,7 +8,11 @@
     <title>Todos</title>
     <link rel="stylesheet" href="{% static "home/todo-style.css" %}">
 </head>
+{% comment %} <script src="{% static "home/js/app.js" %}"></script> {% endcomment %}
 <body>
+  <div class="navbar">
+    <a href="{% url "logout-user" %}">logout</a>
+</div>
     <svg viewBox="0 0 0 0" style="position: absolute; z-index: -1; opacity: 0;">
         <defs>
           <linearGradient id="boxGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="25" y2="25">
@@ -30,6 +34,10 @@
       
       
       <div class="todo-list">
+      <button class="add-task-button">
+          <span class="plus-sign">+</span>
+          <span class="add-task-text">Add a task</span>
+      </button>
         {% for task in tasks %}
           <label class="todo">
             <input class="todo__state" type="checkbox" />
@@ -42,6 +50,14 @@
             <div class="todo__text">{{ task }}</div>
           </label>
         {% endfor %}
+
+      <div class="completed-section">
+        <div class="completed-text">Completed</div>
+        <div class="completed-tasks">
+          <!-- This is where completed tasks will appear -->
+        </div>
+      </div>
       </div>
 </body>
 </html>
+
