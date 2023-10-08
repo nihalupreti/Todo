@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
+# from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse, HttpResponse
 from .models import Data
 #
 
@@ -59,3 +60,14 @@ def todo_page(request, uuid):
         })
     else:
         return HttpResponseForbidden("Access Denied")
+
+
+def delete_data(request):
+    if (request.method) == "POST":
+        # table_data = Data.objects.all()
+        response_data = {
+            "status": True,
+        }
+        return JsonResponse(response_data)
+    else:
+        return HttpResponse("Method not allowed", status=405)
