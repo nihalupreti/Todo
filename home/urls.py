@@ -6,5 +6,6 @@ urlpatterns = [
     path("register", views.register_user_page, name="register-user"),
     path("logout", views.logout_view, name="logout-user"),
     path("delete-task", views.delete_data),
+    path("save-task", views.save_task),
     path("todo/<uuid>", views.todo_page)
 ]

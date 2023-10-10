@@ -1,6 +1,5 @@
 {% load static %}
     
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +44,7 @@
           <span class="add-task-text">Add a task</span>
       </button>
         {% for task in tasks %}
-          <label class="todo" data-task-id={{ task.id }}>
+          <label class="todo">
             <div class="todo__wrapper">
               <input class="todo__state" type="checkbox" />
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 25" class="todo__icon">
@@ -59,9 +58,9 @@
           </label>
         {% endfor %}
 
-      <div class="completed-section">
+      {% comment %} <div class="completed-section">
         <div class="completed-text">Completed</div>
-        <div class="completed-tasks">
+        <div class="completed-tasks"> {% endcomment %}
           <!-- This is where completed tasks will appear -->
         </div>
       </div>
