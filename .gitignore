@@ -1,3 +1,4 @@
 .env
+.vscode
 home/__pycache__/
 Todo/__pycache__/

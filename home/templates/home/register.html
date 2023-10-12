@@ -16,13 +16,16 @@
   <h2>Register</h2>
   <form method="POST">
     {% csrf_token %}
-      <input name='username' placeholder='Username' type='text'>
+    {% for form in forms %}
+      {{ form }}
+      {{ form.errors }}
+    {% endfor %}
+      {% comment %} <input name='username' placeholder='Username' type='text'>
       <input id='pw' name='password' placeholder='Password' type='password'>
-      <input name='email' placeholder='E-Mail Address' type='text'>
+      <input name='email' placeholder='E-Mail Address' type='text'>  {% endcomment %}
       <input class='animated' type='submit' value='Register'>
   </form>
   <a class='forgot' href='{% url "login-page" %}'>Already have an account?</a>
 </div>
-
 </body>
 </html>

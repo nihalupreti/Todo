@@ -1,23 +1,26 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-# from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse, HttpResponse
 from .models import Data
+from .forms import UserRegisterForm
 
 
 def register_user_page(request):
     if (request.method) == "POST":
-        user_username = request.POST["username"]
-        user_email = request.POST["email"]
-        user_password = request.POST["password"]
-        user = User.objects.create_user(
-            user_username, user_email, user_password)
-        user.save()
-        return HttpResponseRedirect("/")
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user_data = form.cleaned_data
+            user = User.objects.create_user(
+                first_name=user_data["first_name"], last_name=user_data["last_name"], username=user_data["username"], email=user_data["email"], password=user_data["password"])
+            user.save()
+            return HttpResponseRedirect("/")
     else:
-        return render(request, "home/register.html")
+        form = UserRegisterForm()
+    return render(request, "home/register.html", {
+        "forms": form
+    })
 
 
 def login_page(request):
@@ -27,9 +30,10 @@ def login_page(request):
         return HttpResponseRedirect(f"/todo/{Data.objects.get(email=my_user.email).id}")
     else:
         if (request.method) == "POST":
-            username_input = request.POST["username"]
+            email_input = request.POST["username"]
             password_input = request.POST["password"]
-            user = authenticate(request, username=username_input,
+            print(email_input)
+            user = authenticate(request, email=email_input,
                                 password=password_input)
             if user is not None:
                 login(request, user)
@@ -51,8 +55,6 @@ def logout_view(request):
 @login_required
 def todo_page(request, uuid):
     user_data = Data.objects.get(id=uuid)
-    # print(f"{user_data.email} data database")
-    # print(f"{request.user.username} user database")
     if request.user.email == user_data.email:
         todo_lists = user_data.todos["unfinished"]
         return render(request, "home/todo-page.html", {
@@ -65,8 +67,6 @@ def todo_page(request, uuid):
 
 def delete_data(request):
     if (request.method) == "POST":
-        # for key, value in request.session.items():
-        #     print(f"Session Key: {key}, Value: {value}")
         table_data = Data.objects.get(id=request.session.get("id"))
         todos = table_data.todos
         clicked_task = request.POST.get('user_todo')
