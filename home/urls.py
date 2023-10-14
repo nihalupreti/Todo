@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('password_reset/', auth_views.PasswordResetView.as_view(),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name="home/reset-password-form.html"),
          name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(),
          name='password_reset_done'),

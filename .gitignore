@@ -2,3 +2,5 @@
 .vscode
 home/__pycache__/
 Todo/__pycache__/
+Dockerfile
+.dockerignore

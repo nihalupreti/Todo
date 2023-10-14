@@ -12,9 +12,12 @@ def register_user_page(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user_data = form.cleaned_data
-            user = User.objects.create_user(
+            register_user = User.objects.create_user(
                 first_name=user_data["first_name"], last_name=user_data["last_name"], username=user_data["username"], email=user_data["email"], password=user_data["password"])
-            user.save()
+            create_user_field = Data(
+                user=user_data["username"], email=user_data["email"])
+            register_user.save()
+            create_user_field.save()
             return HttpResponseRedirect("/")
     else:
         form = UserRegisterForm()
@@ -37,7 +40,6 @@ def login_page(request):
                                 password=password_input)
             if user is not None:
                 login(request, user)
-                request.session["is_logged_in"] = True
                 appropriate_user = Data.objects.get(email=user.email).id
                 request.session["id"] = str(appropriate_user)
                 url_const = f"/todo/{appropriate_user}"
